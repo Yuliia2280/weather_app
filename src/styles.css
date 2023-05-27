@@ -5,7 +5,9 @@ body {
 li {
   list-style: none;
 }
-
+.container {
+  max-width: 620px;
+}
 .weather-app {
   border: 1px solid #9aa0a5;
   border-radius: 10px;
