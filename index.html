@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Weather app</title>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="weather-app">
+        <div class="row">
+          <div class="col-3">
+            <img
+              src="images/logo_weather.svg"
+              alt="Logo_Weather"
+              width="100%"
+            />
+          </div>
+          <div class="col-9">
+            <form class="search-form" id="id-search-form">
+              <div class="row g-1">
+                <div class="col-6">
+                  <input
+                    type="search"
+                    id="city-input"
+                    class="form-control shadow-sm"
+                    placeholder="Enter your city"
+                    autofocus="on"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="col-2">
+                  <input
+                    type="submit"
+                    value="Search"
+                    class="form-control btn btn-primary shadow-sm"
+                    id="buttonSearch"
+                  />
+                </div>
+                <div class="col-4">
+                  <button
+                    class="form-control btn btn-primary location shadow-sm"
+                    id="currentLocation"
+                  >
+                    Current location
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-6 text-center">
+            <h3 class="city"></h3>
+            <h5 class="date">Saturday, 16 April 14:00</h5>
+            <div class="current_day">🌧️</div>
+          </div>
+
+          <div class="col-6">
+            <div class="row g-1">
+              <div class="col-4">
+                <div class="temperature text-center" id="currentTemp"></div>
+              </div>
+
+              <div class="col pt-2 pb-1" id="checkedButton">
+                <div class="clearfix">
+                  <div class="form-check float-left">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="flexRadioCelsius"
+                      checked
+                    />
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      ℃
+                    </label>
+                  </div>
+                  <div class="form-check float-left">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="flexRadioFahrenheit"
+                    />
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      ℉
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col">
+                <ul>
+                  <li id="description">description</li>
+                  <li>humidity: <span id="humidity"></span>%</li>
+                  <li>wind: <span id="wind"></span> km/h</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-1"></div>
+          <div class="col-2">
+            <h6 id="day1">1</h6>
+            <div class="mon_min">min 7º</div>
+            <div class="mon_max">max 13º</div>
+            <div class="mon_icon">🌧️</div>
+          </div>
+          <div class="col-2">
+            <h6 id="day2">2</h6>
+            <div class="tue_min">min 6º</div>
+            <div class="tue_max">max 11º</div>
+            <div class="tue_icon">🌧️</div>
+          </div>
+          <div class="col-2">
+            <h6 id="day3">3</h6>
+            <div class="wed_min">min 7º</div>
+            <div class="wed_max">max 12º</div>
+            <div class="wed_icon">🌧️</div>
+          </div>
+          <div class="col-2">
+            <h6 id="day4">4</h6>
+            <div class="the_min">min 9º</div>
+            <div class="the_max">max 11º</div>
+            <div class="the_icon">🌧️</div>
+          </div>
+          <div class="col-2">
+            <h6 id="day5">5</h6>
+            <div class="fri_min">min 7º</div>
+            <div class="fri_max">max 12º</div>
+            <div class="fri_icon">🌤️</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="src/index.js"></script>
+  </body>
+</html>

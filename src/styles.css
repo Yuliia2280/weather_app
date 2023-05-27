@@ -1,0 +1,50 @@
+body {
+  color: #202124;
+  font-family: Google Sans, arial, sans-serif;
+}
+li {
+  list-style: none;
+}
+
+.weather-app {
+  border: 1px solid #9aa0a5;
+  border-radius: 10px;
+  max-width: 600px;
+  padding: 10px;
+  margin: 10px auto;
+  background: #fcf8f3;
+}
+.form-control {
+  background: #c8ddfc;
+}
+.form-control:hover {
+  background: #c8ddfc;
+}
+.btn-primary {
+  background: #c8dcfc;
+  color: black;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+.btn-primary.location {
+  background: rgb(104, 205, 104);
+}
+.current_day {
+  font-size: 100px;
+}
+.mon_icon,
+.tue_icon,
+.wed_icon,
+.the_icon,
+.fri_icon {
+  font-size: 50px;
+}
+.search-form {
+  margin-bottom: 20px;
+}
+.temperature {
+  color: #202124;
+  font-size: 44px;
+  font-weight: 400;
+  vertical-align: middle;
+}
