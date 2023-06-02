@@ -1,5 +1,12 @@
-function formatDate(date) {
-  let dayIndex = date.getDay();
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+  console.log(date);
+  let offset = date.getTimezoneOffset();
+  console.log(offset);
+  let local = new Date(date.getTime() + offset * 60000);
+  console.log(local);
+  let dayIndex = local.getDay();
+  console.log(dayIndex);
   let days = [
     "Sunday",
     "Monday",
@@ -10,8 +17,8 @@ function formatDate(date) {
     "Saturday",
   ];
   let day = days[dayIndex];
-  let currentDate = date.getDate();
-  let monthIndex = date.getMonth();
+  let currentDate = local.getDate();
+  let monthIndex = local.getMonth();
   let months = [
     "January",
     "Fabruary",
@@ -27,9 +34,9 @@ function formatDate(date) {
     "December",
   ];
   let month = months[monthIndex];
-  let hours = date.getHours();
+  let hours = local.getHours();
   if (hours < 10) hours = `0${hours}`;
-  let minutes = date.getMinutes();
+  let minutes = local.getMinutes();
   if (minutes < 10) minutes = `0${minutes}`;
   let formattedDate = `${day}, ${currentDate} ${month}, ${hours}:${minutes}`;
   return formattedDate;
@@ -73,11 +80,15 @@ function displayWeatherCondition(response) {
   let humidity = response.data.main.humidity;
   let wind = Math.round(response.data.wind.speed);
   let temperature = Math.round(response.data.main.temp);
+  let local = (response.data.dt + response.data.timezone) * 1000;
+
   document.querySelector("#city-input").value = `${city}`;
   document.querySelector(".city").innerHTML = `${city}, ${country}`;
   document.querySelector("#description").innerHTML = `${description}`;
   document.querySelector("#humidity").innerHTML = `${humidity}`;
   document.querySelector("#wind").innerHTML = `${wind}`;
+  document.querySelector("#day").innerHTML = formatDate(local);
+
   let current_temp = document.querySelector("#currentTemp");
   if (document.querySelector("#flexRadioCelsius").checked) {
     if (temperature > 0) {
@@ -138,10 +149,6 @@ function searchLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(showWeather_currentLocation);
 }
-
-let currentDate = new Date();
-
-document.querySelector(".date").innerHTML = formatDate(currentDate);
 
 searchCity("Kyiv");
 
