@@ -93,6 +93,7 @@ function displayWeatherCondition(response) {
   document
     .querySelector("#icon")
     .setAttribute("alt", `${response.data.weather[0].description}`);
+
   let current_temp = document.querySelector("#currentTemp");
   if (document.querySelector("#flexRadioCelsius").checked) {
     if (temperature > 0) {
@@ -109,6 +110,7 @@ function displayWeatherCondition(response) {
       current_temp.innerHTML = `${temperature}`;
     }
   }
+
   let currentDate = new Date();
   let index = currentDate.getDay();
   let days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
@@ -155,7 +157,6 @@ function searchLocation(event) {
 }
 
 searchCity("Kyiv");
-
 document
   .querySelector("#id-search-form")
   .addEventListener("submit", searchCityInput);
