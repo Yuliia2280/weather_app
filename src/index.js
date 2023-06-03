@@ -1,12 +1,8 @@
 function formatDate(timestamp) {
   let date = new Date(timestamp);
-  console.log(date);
   let offset = date.getTimezoneOffset();
-  console.log(offset);
   let local = new Date(date.getTime() + offset * 60000);
-  console.log(local);
   let dayIndex = local.getDay();
-  console.log(dayIndex);
   let days = [
     "Sunday",
     "Monday",
@@ -88,7 +84,15 @@ function displayWeatherCondition(response) {
   document.querySelector("#humidity").innerHTML = `${humidity}`;
   document.querySelector("#wind").innerHTML = `${wind}`;
   document.querySelector("#day").innerHTML = formatDate(local);
-
+  document
+    .querySelector("#icon")
+    .setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+  document
+    .querySelector("#icon")
+    .setAttribute("alt", `${response.data.weather[0].description}`);
   let current_temp = document.querySelector("#currentTemp");
   if (document.querySelector("#flexRadioCelsius").checked) {
     if (temperature > 0) {
