@@ -77,7 +77,7 @@ function displayWeatherCondition(response) {
   let wind = Math.round(response.data.wind.speed);
   let temperature = Math.round(response.data.main.temp);
   let local = (response.data.dt + response.data.timezone) * 1000;
-
+  celsiusTemperature = Math.round(response.data.main.temp);
   document.querySelector("#city-input").value = `${city}`;
   document.querySelector(".city").innerHTML = `${city}, ${country}`;
   document.querySelector("#description").innerHTML = `${description}`;
@@ -93,22 +93,11 @@ function displayWeatherCondition(response) {
   document
     .querySelector("#icon")
     .setAttribute("alt", `${response.data.weather[0].description}`);
-
-  let current_temp = document.querySelector("#currentTemp");
-  if (document.querySelector("#flexRadioCelsius").checked) {
-    if (temperature > 0) {
-      current_temp.innerHTML = `+${temperature}`;
-    } else {
-      current_temp.innerHTML = `${temperature}`;
-    }
+  document.querySelector("#flexRadioCelsius").checked = true;
+  if (celsiusTemperature > 0) {
+    document.querySelector("#currentTemp").innerHTML = `+${celsiusTemperature}`;
   } else {
-    if (temperature > 0) {
-      temperature = Math.round((temperature * 9) / 5 + 32);
-      current_temp.innerHTML = `+${temperature}`;
-    } else {
-      temperature = Math.round((temperature * 9) / 5 + 32);
-      current_temp.innerHTML = `${temperature}`;
-    }
+    document.querySelector("#currentTemp").innerHTML = `${celsiusTemperature}`;
   }
 
   let currentDate = new Date();
@@ -125,6 +114,24 @@ function displayWeatherCondition(response) {
       document.querySelector("#day" + i).innerHTML = `${days[index]}`;
     }
   } while (i < 5);
+}
+function showTempCelsius() {
+  let current_temp = document.querySelector("#currentTemp");
+  if (celsiusTemperature > 0) {
+    current_temp.innerHTML = `+${celsiusTemperature}`;
+  } else {
+    current_temp.innerHTML = `${celsiusTemperature}`;
+  }
+}
+function showTempFahrenheit() {
+  let current_temp = document.querySelector("#currentTemp");
+  if (celsiusTemperature > 0) {
+    current_temp.innerHTML = `+${Math.round(
+      (celsiusTemperature * 9) / 5 + 32
+    )}`;
+  } else {
+    current_temp.innerHTML = `${Math.round((celsiusTemperature * 9) / 5 + 32)}`;
+  }
 }
 
 function searchCity(city) {
@@ -156,6 +163,7 @@ function searchLocation(event) {
   navigator.geolocation.getCurrentPosition(showWeather_currentLocation);
 }
 
+let celsiusTemperature = null;
 searchCity("Kyiv");
 document
   .querySelector("#id-search-form")
@@ -165,8 +173,10 @@ document
   .querySelector("#currentLocation")
   .addEventListener("click", searchLocation);
 
-document.querySelector("#flexRadioCelsius").addEventListener("click", showTemp);
+document
+  .querySelector("#flexRadioCelsius")
+  .addEventListener("click", showTempCelsius);
 
 document
   .querySelector("#flexRadioFahrenheit")
-  .addEventListener("click", showTemp);
+  .addEventListener("click", showTempFahrenheit);
