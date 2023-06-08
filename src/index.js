@@ -37,10 +37,20 @@ function formatDate(timestamp) {
   let formattedDate = `${day}, ${currentDate} ${month}, ${hours}:${minutes}`;
   return formattedDate;
 }
-function displayForecast(response) {
-  console.log(response.data.daily);
-  let forecastElement = document.querySelector("#forecast");
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  return days[day];
+}
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
+  console.log(forecast);
+
+  let forecastElement = document.querySelector("#forecast");
+  /*
   let currentDate = new Date(local);
   let index = currentDate.getDay();
   let i = 0;
@@ -58,24 +68,34 @@ function displayForecast(response) {
 
     index = index + 1;
   } while (i < 6);
-
+*/
   let forecastHTML = `<div class="row mt-5">`;
 
-  daysTransform.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-              <div class="weather-forecast-date" id="day1">${day}</div>
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
+              <div class="weather-forecast-date" id="day1">${formatDay(
+                forecastDay.dt
+              )}</div>
               <div class="weather-forecast-temperature">
-                <span class="weather-forecast-temperature-max"> 18° </span>
-                <span class="weather-forecast-temperature-min"> 10° </span>
+                <span class="weather-forecast-temperature-max"> ${Math.round(
+                  forecastDay.temp.max
+                )}º </span>
+                <span class="weather-forecast-temperature-min"> ${Math.round(
+                  forecastDay.temp.min
+                )}º </span>
               </div>
               <img
-                src="http://openweathermap.org/img/wn/04d@2x.png"
+                src="http://openweathermap.org/img/wn/${
+                  forecastDay.weather[0].icon
+                }@2x.png"
                 alt=""
                 width="50"
               />
             </div>`;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
