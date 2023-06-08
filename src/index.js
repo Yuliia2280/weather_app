@@ -37,6 +37,53 @@ function formatDate(timestamp) {
   let formattedDate = `${day}, ${currentDate} ${month}, ${hours}:${minutes}`;
   return formattedDate;
 }
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let currentDate = new Date(local);
+  let index = currentDate.getDay();
+  let i = 0;
+  let days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  let daysTransform = [];
+  console.log(daysTransform);
+  do {
+    if (index < 7) {
+      console.log(days[i]);
+      daysTransform[i] = days[index];
+      console.log(days[index]);
+    } else {
+      index = 0;
+      daysTransform[i] = days[index];
+      console.log(days[index]);
+    }
+    i = i + 1;
+    console.log(i);
+    index = index + 1;
+    console.log(index);
+  } while (i < 6);
+  console.log(daysTransform);
+  let forecastHTML = `<div class="row mt-5">`;
+
+  daysTransform.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+              <div class="weather-forecast-date" id="day1">${day}</div>
+              <div class="weather-forecast-temperature">
+                <span class="weather-forecast-temperature-max"> 18° </span>
+                <span class="weather-forecast-temperature-min"> 10° </span>
+              </div>
+              <img
+                src="http://openweathermap.org/img/wn/04d@2x.png"
+                alt=""
+                width="50"
+              />
+            </div>`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
 
 function remove_extra_char_spaces_within_a_string(city) {
   //удаляет лишние знаки и пробелы в строке
@@ -76,7 +123,7 @@ function displayWeatherCondition(response) {
   let humidity = response.data.main.humidity;
   let wind = Math.round(response.data.wind.speed);
   let temperature = Math.round(response.data.main.temp);
-  let local = (response.data.dt + response.data.timezone) * 1000;
+  local = (response.data.dt + response.data.timezone) * 1000;
   celsiusTemperature = Math.round(response.data.main.temp);
   document.querySelector("#city-input").value = `${city}`;
   document.querySelector(".city").innerHTML = `${city}, ${country}`;
@@ -99,7 +146,7 @@ function displayWeatherCondition(response) {
   } else {
     document.querySelector("#currentTemp").innerHTML = `${celsiusTemperature}`;
   }
-
+  /*
   let currentDate = new Date();
   let index = currentDate.getDay();
   let days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
@@ -114,6 +161,7 @@ function displayWeatherCondition(response) {
       document.querySelector("#day" + i).innerHTML = `${days[index]}`;
     }
   } while (i < 5);
+  */
 }
 function showTempCelsius() {
   let current_temp = document.querySelector("#currentTemp");
@@ -164,7 +212,7 @@ function searchLocation(event) {
 }
 
 let celsiusTemperature = null;
-searchCity("Kyiv");
+let local = null;
 document
   .querySelector("#id-search-form")
   .addEventListener("submit", searchCityInput);
@@ -180,3 +228,6 @@ document
 document
   .querySelector("#flexRadioFahrenheit")
   .addEventListener("click", showTempFahrenheit);
+
+searchCity("Kyiv");
+displayForecast();
