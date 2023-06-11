@@ -33,13 +33,21 @@ input[type="radio"] {
   width: 20px;
   height: 20px;
 }
+
 .form-check .form-check-input {
   margin-left: -1.6em;
 }
+
 .form-check-input:checked {
   background-color: rgb(71, 125, 71);
   border-color: rgb(71, 125, 71);
 }
+
+.form-check-input #flexRadioDefault2:checked {
+  background-color: rgb(71, 125, 71);
+  border-color: rgb(71, 125, 71);
+}
+
 .container {
   max-width: 800px;
   margin-top: 70px;
