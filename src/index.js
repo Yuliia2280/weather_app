@@ -107,14 +107,14 @@ function correctSpellingCityName(city) {
 }
 
 function getForecast(coordinates) {
-  let apiKey = "445905dadb3d2b0c6f1b916c9d0e3860";
+  let apiKey = "b35c686ba9565ba0ab254c2230937552";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${unit}`;
   axios.get(`${apiUrl}`).then(displayForecast);
 }
 
 function showTemp() {
   let cityInput = document.querySelector("#city-input").value;
-  let apiKey = "445905dadb3d2b0c6f1b916c9d0e3860";
+  let apiKey = "b35c686ba9565ba0ab254c2230937552";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${apiKey}&units=${unit}`;
   axios.get(`${apiUrl}`).then(displayWeatherCondition);
 }
@@ -168,7 +168,7 @@ function showTempFahrenheit() {
 }
 
 function searchCity(city) {
-  let apiKey = "445905dadb3d2b0c6f1b916c9d0e3860";
+  let apiKey = "b35c686ba9565ba0ab254c2230937552";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
   axios.get(`${apiUrl}`).then(displayWeatherCondition);
 }
@@ -184,7 +184,7 @@ function searchCityInput(event) {
 function showWeather_currentLocation(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
-  let apiKey = "445905dadb3d2b0c6f1b916c9d0e3860";
+  let apiKey = "b35c686ba9565ba0ab254c2230937552";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`;
   axios.get(`${apiUrl}`).then(displayWeatherCondition);
 }
